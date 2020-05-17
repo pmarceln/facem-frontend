@@ -1,0 +1,15 @@
+<div class="d-flex h-100 align-items-center justify-content-center">
+    <form [formGroup]="form" class="login-form">
+        <div class="mb-2">
+            <input matInput type="email" placeholder="Email" formControlName="email">
+        </div>
+        <div class="mb-2">
+            <input matInput type="password" placeholder="Password"
+                   formControlName="password">
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="login()" [disabled]="!form.valid">Login</button>
+        </div>
+
+    </form>
+</div>
