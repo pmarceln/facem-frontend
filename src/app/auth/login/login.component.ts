@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_service/auth.service';
 import { tap } from 'rxjs/internal/operators/tap';
 import { noop } from 'rxjs/internal/util/noop';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
+        private router: Router,
         private authService: AuthService
     ) {
         this.form = fb.group({
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
 
                 // this.store.dispatch(login({ user }));
 
-                // this.router.navigateByUrl('/courses');
+                this.router.navigateByUrl('/admin');
             })
         )
         .subscribe(noop, () => alert('Login Failed'));
