@@ -1,0 +1,5 @@
+<div class="h-100 scrollbar w-100" *ngIf="selectedProject">
+    <div *ngFor="let photo of selectedProject.photos" class="w-100 d-flex justify-content-center">
+        <img src="{{ photo.photo }}">
+    </div>
+</div>

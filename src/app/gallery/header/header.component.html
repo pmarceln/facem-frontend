@@ -1,0 +1,26 @@
+<div class="d-flex header-content align-items-center justify-content-between">
+    <img src="assets/images/header/facem.logo.png" alt="facem.grapsics">
+    <div class="menu-content">
+        <ul class="m-0 text-uppercase">
+            <li (click)="onNextPrevProjectClick('prev')" *ngIf="(selectedProject$ | async) !== null" class="hover"
+                [ngClass]="{'cursor-pointer' : (filterIdSubject | async) !== null || (selectedProject$ | async) !== null }">
+                <img src="assets/images/header/ico.prev.png" alt="">
+            </li>
+            <li (click)="onMenuClick(null)"
+                [ngClass]="{'cursor-pointer' : (filterIdSubject | async) !== null || (selectedProject$ | async) !== null }">
+                <img src="assets/images/header/ico.home.png" alt="">
+            </li>
+            <li (click)="onNextPrevProjectClick('next')" *ngIf="(selectedProject$ | async) !== null" class="hover"
+                [ngClass]="{'cursor-pointer' : (filterIdSubject | async) !== null || (selectedProject$ | async) !== null }">
+                <img src="assets/images/header/ico.next.png" alt="">
+            </li>
+            <ng-container *ngIf="(selectedProject$ | async) === null">
+                <li (click)="onMenuClick(menu.id)" class="hover"
+                    [ngClass]="{'active' : (filterIdSubject | async) === menu.id }"
+                    *ngFor="let menu of (filters$ | async)">
+                    {{ menu.name }}
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>

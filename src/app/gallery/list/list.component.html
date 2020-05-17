@@ -1,0 +1,11 @@
+<div *ngIf="!showLogoIntro" class="h-100 d-flex flex-wrap justify-content-around scrollbar">
+    <div *ngFor="let project of (project$ | async)" class="thumb-content" (click)="onProjectClick(project)"
+        (mouseenter)="onMouseEnter(project)" (mouseleave)="onMouseLeave(project)">
+        <img src="{{ project.icon_active }}" alt="">
+    </div>
+</div>
+<div *ngIf="showLogoIntro" class="h-100 d-flex flex-wrap justify-content-center align-items-center">
+    <div class="logo-intro">
+        <img src="assets/images/facem.logo.intro.png" alt="facem.grapsics">
+    </div>
+</div>

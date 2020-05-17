@@ -1,0 +1,41 @@
+.header-content {
+    height: 108px;
+    border-bottom: 1px solid #E14B32;
+
+    .menu-content {
+        ul {
+            list-style: none;
+            user-select: none;
+
+            li {
+                display: inline-block;
+                color: #EBEBCD;
+                font-family: 'Azoft Sans';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 13px;
+                line-height: 13px;
+                padding: 7px 16px;
+                border: 1px solid #F5644B;
+            }
+
+            li:hover {
+                border: 1px solid #EBEBCD;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            li.active {
+                border: 1px solid #F5644B;
+                border-radius: 4px;
+                background-color: #EBEBCD;
+                color: #F5644B;
+            }
+
+            li.active:hover {
+                cursor: auto;
+                border: 1px solid #F5644B;
+            }
+        }
+    }
+}
