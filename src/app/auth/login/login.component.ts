@@ -6,8 +6,9 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { noop } from 'rxjs/internal/util/noop';
 import { Router } from '@angular/router';
 import { AppState } from 'src/app/reducers';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AuthActions } from '../action-types';
+import { isLoggedIn } from '../auth.selectors';
 
 @Component({
     selector: 'app-login',
@@ -29,7 +30,13 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.store.pipe(select(isLoggedIn)).subscribe((isLogged) => {
+            if (isLogged) {
+                this.router.navigateByUrl('/admin');
+            }
+        });
+    }
 
     login() {
         const val = this.form.value;
@@ -37,7 +44,12 @@ export class LoginComponent implements OnInit {
             .login(val.email, val.password)
             .pipe(
                 tap((data) => {
-                    this.store.dispatch(AuthActions.login({ user: data.user, token: data.token }));
+                    this.store.dispatch(
+                        AuthActions.login({
+                            user: data.user,
+                            token: data.token,
+                        })
+                    );
                     this.router.navigateByUrl('/admin');
                 })
             )
