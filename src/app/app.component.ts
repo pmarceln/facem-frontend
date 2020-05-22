@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from './_service/store.service';
 import { Store } from '@ngrx/store';
 import { AppState } from './reducers';
+import { login } from './auth/auth.actions';
 
 @Component({
     selector: 'app-root',
@@ -15,10 +16,11 @@ export class AppComponent implements OnInit{
     constructor(private store: StoreService, private ngStore: Store<AppState>) {}
 
     ngOnInit(): void {
-        this.ngStore.subscribe(
-            (state) => {
-                console.log(state);
-            }
-        );
+        const user = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+
+        if (user && token) {
+            this.ngStore.dispatch(login({ user: JSON.parse(user), token: JSON.parse(token) }));
+        }
     }
 }

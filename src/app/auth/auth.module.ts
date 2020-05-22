@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { AuthGuard } from './auth-guard';
+import { authReducer } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth-effects';
+
 import { AuthService } from './_service/auth.service';
 
 import { LoginComponent } from './login/login.component';
-import { authReducer } from './reducers';
 
 @NgModule({
     declarations: [LoginComponent],
@@ -14,7 +17,8 @@ import { authReducer } from './reducers';
         CommonModule,
         ReactiveFormsModule,
         StoreModule.forFeature('auth', authReducer),
+        EffectsModule.forFeature([AuthEffects]),
     ],
-    providers: [AuthService, AuthGuard]
+    providers: [AuthService, AuthGuard],
 })
 export class AuthModule {}
