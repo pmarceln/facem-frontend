@@ -36,4 +36,8 @@ export class HeaderComponent implements OnInit {
     public onNextPrevProjectClick(action: string): void {
         this.store.nextPrevProjectClick(action);
     }
+
+    public goToLogin(): void {
+        this.router.navigateByUrl('/login');
+    }
 }
