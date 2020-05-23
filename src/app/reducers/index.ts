@@ -1,5 +1,4 @@
-import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { environment } from '../../environments/environment';
+import { ActionReducerMap } from '@ngrx/store';
 import { routerReducer } from '@ngrx/router-store';
 
 export interface AppState {}

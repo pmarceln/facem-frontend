@@ -29,7 +29,6 @@ export class StoreService {
                 const filters = [];
                 const projects = [];
                 data.filters.forEach((el: Filter) => filters.push(new Filter(el.id, el.name, el.order)));
-                this.filtersSubject.next(filters);
                 data.projects.forEach(
                     (el: Project) => {
                         const photos = [];
@@ -48,6 +47,34 @@ export class StoreService {
                 this.filtersSubject.next(filters);
                 this.projectsSubject.next(projects);
             }
+        );
+    }
+
+    public getAllData(): Observable<{ filters: Filter[], projects: Project[] }> {
+        return this.httpClient.get('http://api.facem.graphics/api/getallData').pipe(
+            map(
+                (data: { filters: FilterInterface[], projects: ProjectInterface[] }) => {
+                    const filters = [];
+                    const projects = [];
+                    data.filters.forEach((el: Filter) => filters.push(new Filter(el.id, el.name, el.order)));
+                    data.projects.forEach(
+                        (el: Project) => {
+                            const photos = [];
+                            el.photos.forEach(
+                                (element: Photo) => {
+                                    const photo = 'https://api.facem.graphics/uploads/' + element.photo;
+                                    photos.push(new Photo(element.id, element.idproject, element.order, photo));
+                                }
+                            );
+                            const icon = 'https://api.facem.graphics/uploads/' + el.icon;
+                            const iconHover = 'https://api.facem.graphics/uploads/' + el.icon_hover;
+                            const digits = el.filters.split(',');
+                            projects.push(new Project(digits.map(Number), icon, iconHover, icon, el.id, el.name, el.order, photos));
+                        }
+                    );
+                    return { filters, projects };
+                }
+            )
         );
     }
 
