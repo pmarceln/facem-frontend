@@ -11,6 +11,7 @@ import { GalleryComponent } from './gallery.component';
 import { HeaderComponent } from './header/header.component';
 import { ListComponent } from './list/list.component';
 import { ProjectComponent } from './project/project.component';
+import { ProjectGuard } from '../auth/project-guard';
 
 @NgModule({
     declarations: [GalleryComponent, HeaderComponent, ListComponent, ProjectComponent],
@@ -20,6 +21,6 @@ import { ProjectComponent } from './project/project.component';
         EffectsModule.forFeature([GalleryEffects]),
         StoreModule.forFeature('gallery', galleryReducer)
     ],
-    providers: []
+    providers: [ProjectGuard]
 })
 export class GalleryModule {}

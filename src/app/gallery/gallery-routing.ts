@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProjectGuard } from '../auth/project-guard';
 
 import { GalleryComponent } from './gallery.component';
 import { ListComponent } from './list/list.component';
@@ -9,7 +10,7 @@ const routes: Routes = [
     {
         path: '', component: GalleryComponent, children: [
             { path: '', component: ListComponent },
-            { path: 'project', component: ProjectComponent },
+            { path: 'project', component: ProjectComponent, canActivate: [ProjectGuard] },
             { path: '**', component: ListComponent },
         ],
     },

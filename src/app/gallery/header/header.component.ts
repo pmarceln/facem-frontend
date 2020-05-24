@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StoreService } from 'src/app/_service/store.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { selectFilters, selectFilterId, selectProject } from '../gallery.selectors';
 
 import { Filter } from 'src/app/_model/filter.model';
 import { Project } from 'src/app/_model/project.model';
+import { menuClick } from '../gallery.actions';
 
 @Component({
     selector: 'app-header',
@@ -14,23 +17,20 @@ import { Project } from 'src/app/_model/project.model';
 export class HeaderComponent implements OnInit {
 
     public filters$: Observable<Filter[]>;
-    public filterIdSubject: BehaviorSubject<number>;
+    public filterIdSubject: Observable<number>;
     public selectedProject$: Observable<Project>;
 
-    constructor(private store: StoreService, private router: Router) {}
+    constructor(private store: StoreService, private router: Router, private ngStore: Store) {}
 
     ngOnInit(): void {
-        this.selectedProject$ = this.store.selectedProject$;
-        this.filters$ = this.store.filters$;
-        this.filterIdSubject = this.store.filterIdSubject;
+        this.filters$ = this.ngStore.pipe(select(selectFilters));
+        this.filterIdSubject = this.ngStore.pipe(select(selectFilterId));
+        this.selectedProject$ = this.ngStore.pipe(select(selectProject));
     }
 
     public onMenuClick(id: number): void {
-        this.filterIdSubject.next(id);
+        this.ngStore.dispatch(menuClick({ filterId: id }));
         this.router.navigate(['/']);
-        if (id === null) {
-            this.store.selectProject(null);
-        }
     }
 
     public onNextPrevProjectClick(action: string): void {

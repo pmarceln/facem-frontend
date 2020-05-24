@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../reducers';
 import { loadData } from './gallery.actions';
+import { selectHasData } from './gallery.selectors';
 
 @Component({
     selector: 'app-gallery',
@@ -13,6 +14,12 @@ export class GalleryComponent implements OnInit {
     constructor(private store: Store<AppState>) {}
 
     ngOnInit(): void {
-        this.store.dispatch(loadData());
+        this.store.pipe(select(selectHasData)).subscribe(
+            (has: boolean) => {
+                if (!has) {
+                    this.store.dispatch(loadData());
+                }
+            }
+        );
     }
 }

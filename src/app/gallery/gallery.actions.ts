@@ -11,3 +11,13 @@ export const dataLoaded = createAction(
     '[Load Data Effect] All Data Loaded',
     props<{ filters: Filter[], projects: Project[] }>()
 );
+
+export const menuClick = createAction(
+    '[Menu Click] Filter Projects',
+    props<{ filterId: number }>()
+);
+
+export const projectClick = createAction(
+    '[Project Click] Gallery List',
+    props<{ project: string }>()
+);

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { selectProject } from '../gallery.selectors';
 
 import { Project } from 'src/app/_model/project.model';
-import { StoreService } from 'src/app/_service/store.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-project',
@@ -12,18 +12,11 @@ import { Router } from '@angular/router';
 })
 export class ProjectComponent implements OnInit {
 
-    public selectedProject: Project;
+    public project$: Observable<Project>;
 
-    constructor(private store: StoreService, private router: Router) {}
+    constructor(private ngStore: Store) { }
 
     ngOnInit(): void {
-        this.store.selectedProject$.subscribe(
-            (project: Project) => {
-                if (project === null) {
-                    this.router.navigate(['/']);
-                }
-                this.selectedProject = project;
-            }
-        );
+        this.project$ = this.ngStore.pipe(select(selectProject));
     }
 }
