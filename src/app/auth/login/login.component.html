@@ -1,15 +1,16 @@
 <div class="d-flex h-100 align-items-center justify-content-center">
     <form [formGroup]="form" class="login-form">
-        <div class="mb-2">
-            <input matInput type="email" placeholder="Email" formControlName="email">
+        <h1>FACEM MNGMT</h1>
+        <div class="mb-3">
+            <p class="mb-1 input-for">EMAIL</p>
+            <input class="facem-input" matInput type="email" placeholder="Email" formControlName="email">
         </div>
-        <div class="mb-2">
-            <input matInput type="password" placeholder="Password"
-                   formControlName="password">
+        <div class="mb-4">
+            <p class="mb-1 input-for">PASSWORD</p>
+            <input class="facem-input" matInput type="password" placeholder="Password" formControlName="password">
         </div>
         <div>
-            <button mat-raised-button color="primary" (click)="login()" [disabled]="!form.valid">Login</button>
+            <button mat-raised-button class="facem-buttom" color="primary" (click)="login()" [disabled]="!form.valid">Login</button>
         </div>
-
     </form>
 </div>

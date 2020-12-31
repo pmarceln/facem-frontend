@@ -17,9 +17,5 @@ export class AppComponent implements OnInit{
     ngOnInit(): void {
         const user = localStorage.getItem('user');
         const token = localStorage.getItem('token');
-
-        if (user && token) {
-            this.ngStore.dispatch(login({ user: JSON.parse(user), token: JSON.parse(token) }));
-        }
     }
 }

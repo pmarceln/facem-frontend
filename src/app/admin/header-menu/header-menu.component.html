@@ -1,0 +1,10 @@
+<div class="d-flex header-content align-items-center justify-content-between">
+    <img src="assets/images/header/facem.logo.png" alt="facem.grapsics" (click)="goToGallery()">
+    <div class="menu-content">
+        <ul class="m-0 text-uppercase">
+            <li [routerLink]="['categories']" routerLinkActive="active">Categories</li>
+            <li [routerLink]="['projects']" routerLinkActive="active">Projects</li>
+            <li (click)="logOut()">Sign Out</li>
+        </ul>
+    </div>
+</div>

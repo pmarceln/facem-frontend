@@ -1,5 +1,5 @@
 import { FilterInterface } from '../_interface/filter.interface';
 
 export class Filter implements FilterInterface {
-    constructor( public id = null, public name = null, public order = null) { }
+    constructor( public id = null, public name = null, public order = null, public is_active = false) { }
 }

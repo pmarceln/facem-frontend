@@ -11,8 +11,8 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.login),
             tap( action => {
-                localStorage.setItem('user', JSON.stringify(action.user));
-                localStorage.setItem('token', JSON.stringify(action.token));
+                localStorage.setItem('user', action.user.email);
+                localStorage.setItem('token', action.token);
             })
         ),
         { dispatch: false }

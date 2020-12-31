@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
     {
         path: '', component: AdminComponent, children: [
-            // { path: '', component: ListComponent },
-            // { path: 'project', component: ProjectComponent },
-            // { path: '**', component: ListComponent },
+            { path: 'categories', component: CategoriesComponent },
+            { path: 'projects', component: ProjectsComponent },
+            { path: '**', component: AdminComponent },
         ],
     },
 ];

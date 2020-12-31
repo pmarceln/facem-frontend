@@ -16,7 +16,10 @@ body {
         cursor: pointer;
     }
 }
-
+.mat-checkbox-layout {
+    margin: 0px!important;
+    margin-bottom: 4px!important;
+}
 // .scrollbar {
 //     &::-webkit-scrollbar-thumb {
 //         background-color:transparent;
@@ -49,3 +52,99 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.gallery-content {
+    width: 980px;
+
+    .gallery-list {
+        height: calc(100% - 110px);
+    }
+}
+
+.header-content {
+    height: 108px;
+    border-bottom: 1px solid #E14B32;
+
+    .menu-content {
+        ul {
+            list-style: none;
+            user-select: none;
+
+            li {
+                display: inline-block;
+                color: #EBEBCD;
+                font-family: 'Azoft Sans';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 13px;
+                line-height: 13px;
+                padding: 7px 16px;
+                border: 1px solid #F5644B;
+            }
+
+            li:hover {
+                border: 1px solid #EBEBCD;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            li.active {
+                border: 1px solid #F5644B;
+                border-radius: 4px;
+                background-color: #EBEBCD;
+                color: #F5644B;
+            }
+
+            li.active:hover {
+                cursor: auto;
+                border: 1px solid #F5644B;
+            }
+        }
+    }
+}
+
+input.facem-input {
+    background-color: #C83219;
+    color: #EBEBCD;
+    border: none;
+    width: 320px;
+    padding: 7px 16px;
+    border-radius: 4px;
+    height: 27px;
+}
+input.facem-input::placeholder {
+    font-family: 'Azoft Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 13px;
+    color: #F5644B;
+}
+
+input:focus {
+    outline: none;
+}
+
+p.input-for {
+    font-family: 'Azoft Sans';
+    color: #C83219;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+button.facem-buttom {
+    padding: 0px 16px;
+    border: none;
+    position: absolute;
+    width: 81px;
+    height: 27px;
+    background: #EBEBCD;
+    border-radius: 4px;
+    color: #C83219;
+}
+button.facem-buttom:focus {
+    outline: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

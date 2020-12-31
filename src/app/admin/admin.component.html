@@ -1,2 +1,6 @@
-<p (click)="goToGallery()">go to gallery</p>
-<p (click)="logOut()">log out</p>
+<div class="gallery-content h-100 m-auto">
+    <app-header-menu></app-header-menu>
+    <div class="gallery-list">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -13,14 +13,7 @@ export class AdminComponent implements OnInit {
 
     constructor(private router: Router, private store: Store<AppState>) {}
 
-    ngOnInit(): void {}
-
-    public goToGallery(): void {
-        this.router.navigateByUrl('/');
-    }
-
-    public logOut(): void {
-        this.store.dispatch(logout());
-        this.goToGallery();
+    ngOnInit(): void {
+        this.router.navigateByUrl('/admin/categories');
     }
 }

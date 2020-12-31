@@ -12,13 +12,12 @@ import { Photo } from '../_model/photo.model';
 @Injectable({ providedIn: 'root' })
 export class StoreService {
 
-    // private filtersSubject: BehaviorSubject<Filter[]> =  new BehaviorSubject([]);
-    // private projectsSubject: BehaviorSubject<Project[]> =  new BehaviorSubject([]);
-    // private selectedProjectSubject: BehaviorSubject<Project> = new BehaviorSubject(null);
-
-    // public filterIdSubject: BehaviorSubject<number> = new BehaviorSubject(null);
-    // public project$: Observable<Project[]> = this.projectsSubject.asObservable();
-    // public selectedProject$: Observable<Project> = this.selectedProjectSubject.asObservable();
+    private filtersSubject: BehaviorSubject<Filter[]> =  new BehaviorSubject([]);
+    private projectsSubject: BehaviorSubject<Project[]> =  new BehaviorSubject([]);
+    private spinnerSubject: BehaviorSubject<boolean> =  new BehaviorSubject(false);
+    public project$: Observable<Project[]> = this.projectsSubject.asObservable();
+    public filter$: Observable<Filter[]> = this.filtersSubject.asObservable();
+    public spinner$: Observable<boolean> = this.spinnerSubject.asObservable();
 
     constructor(private httpClient: HttpClient) { }
 
@@ -28,7 +27,7 @@ export class StoreService {
                 (data: { filters: FilterInterface[], projects: ProjectInterface[] }) => {
                     const filters = [];
                     const projects = [];
-                    data.filters.forEach((el: Filter) => filters.push(new Filter(el.id, el.name, el.order)));
+                    data.filters.forEach((el: Filter) => filters.push(new Filter(el.id, el.name, el.order, el.is_active ? true : false)));
                     data.projects.forEach(
                         (el: Project) => {
                             const photos = [];
@@ -44,12 +43,14 @@ export class StoreService {
                             projects.push(new Project(digits.map(Number), icon, iconHover, icon, el.id, el.name, el.order, photos));
                         }
                     );
+                    this.filtersSubject.next(filters);
+                    this.projectsSubject.next(projects);
+
                     return { filters, projects };
                 }
             )
         );
     }
-
     // public filterProjects(id: number): Observable<Project[]> {
     //     return this.project$.pipe(
     //         map((proj: Project[]) => proj.filter((pr: Project) => pr.filters.findIndex((el: number) => el === id) === -1 ? false : true))
@@ -81,5 +82,20 @@ export class StoreService {
 
         //     this.selectedProjectSubject.next(projects[index]);
         // }
+    }
+
+    public updateFilterActiveProperty(filter: any): void {
+        filter.is_active = filter.is_active ? 1 : 0;
+        this.httpClient.post('http://api.facem.graphics/api/filterIsActive', { filter }).subscribe(
+            (filter: Filter) => {
+                let filters = this.filtersSubject.getValue();
+                let newFilters = JSON.parse(JSON.stringify(filters));
+                let index = newFilters.findIndex(el => el.id === filter.id);
+                newFilters[index].is_active = filter.is_active ? true : false;
+                this.filtersSubject.next(newFilters);
+                this.spinnerSubject.next(false);
+            },
+            error => console.log(error)
+        );
     }
 }
