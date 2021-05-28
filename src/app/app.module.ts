@@ -4,11 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
-import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TokenInterceptor } from './auth/_interceptor/token.interceptor';
-
-
-
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';

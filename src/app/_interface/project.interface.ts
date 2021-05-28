@@ -9,4 +9,5 @@ export interface ProjectInterface {
     name: string;
     order: number;
     photos: PhotoInterface[];
+    is_active: number;
 }

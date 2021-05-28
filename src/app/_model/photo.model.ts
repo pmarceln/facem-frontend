@@ -7,6 +7,7 @@ export class Photo implements PhotoInterface {
         public idproject = null,
         public order = null,
         public photo = null,
+        public description = null
     ) {}
 
 }

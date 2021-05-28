@@ -1,5 +1,7 @@
 <div class="h-100 scrollbar w-100">
-    <div *ngFor="let photo of (project$ | async).photos" class="w-100 d-flex justify-content-center">
+    <!-- <div *ngFor="let photo of (project$ | async).photos" class="w-100 d-flex justify-content-center"> -->
+    <div *ngFor="let photo of (project$ | async).photos" class="w-100">
+        <p class="m-0" *ngIf="photo.description">{{ photo.description }}</p>
         <img src="{{ photo.photo }}">
     </div>
 </div>

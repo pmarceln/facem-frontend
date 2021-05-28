@@ -9,6 +9,6 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     public login(email: string, password: string): Observable<{ user: User, token: string }> {
-        return this.http.post<{ user: User, token: string }>('http://api.facem.graphics/api/login', { email, password });
+        return this.http.post<{ user: User, token: string }>('https://api.facem.graphics/api/login', { email, password });
     }
 }

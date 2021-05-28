@@ -1,1 +1,28 @@
-<p>projects works!</p>
+<div class="add-project-content pt-4 pb-4">
+    <p class="prj-item text-uppercase mb-2">facem projects</p>
+    <p class="input-for text-uppercase mb-1">new project</p>
+    <div class="d-flex">
+        <div><input class="facem-input mr-4" [(ngModel)]="newProjectName" type="text" placeholder="PROJECT NAME"></div>
+        <div class="d-flex align-items-center" style="width: 100px;">
+            <button class="facem-buttom" (click)="addProject()" [disabled]="!newProjectName || newProjectName.length === 0 || !newPrjIcons[0] || !newPrjIcons[1]">add</button>
+        </div>
+    </div>
+    <mat-form-field>
+        <mat-label>Filtre</mat-label>
+        <mat-select [formControl]="filters" (selectionChange)="onFilterChange($event)" multiple>
+          <mat-option *ngFor="let filter of (filter$ | async)" [value]="filter.id">{{ filter.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="mt-2 mb-2"><input type="file" (change)="uploadFile($event.target.files, 0)" /></div>
+    <div><input type="file" (change)="uploadFile($event.target.files, 1)" /></div>
+</div>
+<div class="project-content">
+    <div *ngFor="let project of (project$ | async)" class="project-item d-flex align-items-center">
+        <img [routerLink]="['/admin/project', project.id]" src="{{ project.icon_active }}" class="mr-4">
+        <p [routerLink]="['/admin/project', project.id]" class="ml-4">{{ project.name }}</p>
+        <mat-checkbox class="item-active ml-3" [checked]="project.is_active" [color]="'warn'" (click)="onIsActiveClick(project.id, project.is_active)"></mat-checkbox>
+    </div>
+</div>
+<div class="position-absolute" style="top: 50%; right: 50%" *ngIf="showSpinner">
+    <mat-spinner></mat-spinner>
+</div>

@@ -13,5 +13,6 @@ export class Project implements ProjectInterface {
         public name = null,
         public order = null,
         public photos = null,
+        public is_active = 0,
     ) {}
 }

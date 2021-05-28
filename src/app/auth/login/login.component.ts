@@ -25,9 +25,13 @@ export class LoginComponent implements OnInit {
         private store: Store<AppState>
     ) {
         this.form = fb.group({
-            email: ['pmarceln@yahoo.com', [Validators.required]],
-            password: ['qwerty', [Validators.required]],
+            email: ['', [Validators.required]],
+            password: ['', [Validators.required]],
         });
+        // this.form = fb.group({
+        //     email: ['pmarceln@yahoo.com', [Validators.required]],
+        //     password: ['qwerty', [Validators.required]],
+        // });
     }
 
     ngOnInit(): void {

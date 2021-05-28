@@ -1,0 +1,42 @@
+.add-project-content {
+    border-bottom: 1px solid #e14b32;
+}
+
+.prj-item {
+    font-family: 'Azoft Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 13px;
+    color: #ebebcd;
+}
+
+input {
+    width: 320px;
+}
+
+.project-content {
+    height: calc(100% - 206px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    white-space: nowrap;
+
+    .project-item {
+        border-bottom: 1px solid #e14b32;
+        img {
+            height: 120px;
+            width: 160px;
+            cursor: pointer;
+        }
+        p {
+            margin: 0px;
+            cursor: pointer;
+            font-family: 'Azoft Sans';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 13px;
+            color: #EBEBCD;
+        }
+    }
+}

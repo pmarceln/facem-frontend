@@ -1,0 +1,45 @@
+<div class="project-container h-100 pb-2">
+    <p class="project-name mt-4">{{ (project$ | async).name }}</p>
+    <div><input class="facem-input mr-4" [(ngModel)]="projectName" type="text" placeholder="PROJECT NAME"></div>
+    <mat-form-field class="mt-4">
+        <mat-label>Filtre</mat-label>
+        <mat-select [formControl]="filters" (selectionChange)="onFilterChange($event)" [(ngModel)]="selectedFilters" multiple>
+            <mat-option *ngFor="let filter of (filter$ | async)" [value]="filter.id">{{ filter.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p class="mt-4">cover images</p>
+    <div class="d-flex">
+        <img src="{{ (project$ | async).icon }}" class="mr-4">
+        <img src="{{ (project$ | async).icon_hover }}" class="ml-4">
+    </div>
+    <div class="mt-2 mb-2"><input type="file" (change)="uploadFileCover($event.target.files, 0)" /></div>
+    <div><input type="file" (change)="uploadFileCover($event.target.files, 1)" /></div>
+    <p class="mt-4 mb-2">project images</p>
+    <div *ngFor="let prjImg of projectImages; index as i">
+        <p class="mb-1 color-terracotta">image</p>
+        <input type="file"  (change)="uploadFile($event.target.files, i)"/>
+        <p class="mb-1 color-terracotta mt-2">text</p>
+        <input class="facem-input mb-2" type="text" [(ngModel)]="prjImg.text" placeholder="PROJECT IMAGE TEXT">
+    </div>
+    <div class="mt-4">
+        <button class="facem-buttom" (click)="addProjectImage()">add project image</button>
+    </div>
+    <div class="mt-4">
+        <mat-accordion>
+            <mat-expansion-panel  *ngFor="let photo of (project$ |async).photos; index as i" style="background-color: #C83219;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ photo.description }}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <input class="facem-input" style="width: 90%;" type="text" [(ngModel)]="projectPhotosDescriptionAndOrder[i].description" placeholder="Description">
+                    <input class="facem-input" type="text" [(ngModel)]="projectPhotosDescriptionAndOrder[i].order" placeholder="Order">
+                </div>
+                <img class="img-fluid" src="{{ photo.photo }}" alt="">
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="mt-2">
+        <button class="facem-buttom" (click)="saveProject()">save</button>
+        <button class="facem-buttom ml-4" (click)="saveImagesOrderAndDescription()">save order and description</button>
+    </div>
+</div>

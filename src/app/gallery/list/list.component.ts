@@ -26,11 +26,11 @@ export class ListComponent implements OnInit {
     }
 
     public onMouseEnter(project: Project): void {
-        // project.icon_active = project.icon_hover;
+        project.icon_active = project.icon_hover;
     }
 
     public onMouseLeave(project: Project): void {
-        // project.icon_active = project.icon;
+        project.icon_active = project.icon;
     }
 
     public onProjectClick(project: Project): void {

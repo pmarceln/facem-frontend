@@ -3,4 +3,5 @@ export interface PhotoInterface {
     idproject: number;
     order: number;
     photo: string;
+    description: string;
 }

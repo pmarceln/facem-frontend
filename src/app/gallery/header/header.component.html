@@ -15,11 +15,13 @@
                 <img src="assets/images/header/ico.next.png" alt="">
             </li>
             <ng-container *ngIf="(selectedProject$ | async) === null">
-                <li (click)="onMenuClick(menu.id)" class="hover"
-                    [ngClass]="{'active' : (filterIdSubject | async) === menu.id }"
-                    *ngFor="let menu of (filters$ | async)">
-                    {{ menu.name }}
-                </li>
+                <ng-container *ngFor="let menu of (filters$ | async)">
+                    <li (click)="onMenuClick(menu.id)" class="hover"
+                        *ngIf="menu.is_active"
+                        [ngClass]="{'active' : (filterIdSubject | async) === menu.id }">
+                        {{ menu.name }}
+                    </li>
+                </ng-container>
             </ng-container>
         </ul>
     </div>

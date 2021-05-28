@@ -2,8 +2,9 @@
     <p class="cat-item text-uppercase mb-2">facem categories</p>
     <p class="input-for text-uppercase mb-1">new category</p>
     <div class="d-flex">
-        <div><input class="facem-input mr-4" type="text" placeholder="CATEGORy NAME"></div>
-        <div class="w-100 d-flex align-items-center"><button class="facem-buttom" (click)="addCategory()">add</button></div>
+        <div><input class="facem-input mr-4" type="text" placeholder="CATEGORy NAME" [(ngModel)]="addEditFilter.name"></div>
+        <div class="d-flex align-items-center" style="width: 100px;"><button class="facem-buttom" (click)="addFilter()" [disabled]="!addEditFilter.name || addEditFilter.name.length === 0">add</button></div>
+        <div class="cursor-pointer" (click)="onResetSelectedFilterClick()" *ngIf="addEditFilter.id" ><img src="assets/images/remove.png" /></div>
     </div>
 </div>
 <ul class="p-0 mt-4 text-uppercase">
@@ -11,8 +12,8 @@
         <li class="m-1" *ngFor="let filter of (filters$ | async)" >
             <span class="item-category d-flex align-items-center">
                 <span class="item-drag"><img src="assets/images/drag.png" /></span>
-                <span class="text mr-2 ml-2">{{ filter.name }}</span>
-                <span class="item-remove"><img src="assets/images/remove.png" /></span>
+                <span class="text cursor-pointer mr-2 ml-2" (click)="onEditClick(filter)">{{ filter.name }}</span>
+                <span class="item-remove" (click)="onRemoveClick(filter.id)"><img src="assets/images/remove.png" /></span>
                 <mat-checkbox class="item-active ml-3" [checked]="filter.is_active" [color]="'warn'" (click)="onIsActiveClick(filter)"></mat-checkbox>
             </span>
         </li>
